@@ -78,6 +78,15 @@ buildVariant() {
     echo
 }
 
+buildbinder64Variant() {
+    echo "--> Building treble_b64_bvN"
+    lunch treble_b64_bvN-userdebug
+    make -j$(nproc --all) installclean
+    make -j$(nproc --all) systemimage
+    mv $OUT/system.img $BD/system-treble_b64_bvN.img
+    echo
+}
+
 buildSlimVariant() {
     echo "--> Building treble_arm64_bvN-slim"
     (cd vendor/gms && git am $BL/patches/slim.patch)
